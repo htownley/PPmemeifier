@@ -12,6 +12,8 @@ REQUIREMENTS and INSTALLATION:
 		- To install the necessary packages one can this pip command:
 		- "pip install urllib3, certifi, bs4, textwrap, requests"
 
+TO RUN PROGRAM:
+	- "python report_policy_parser.py"
 
 SUMMMARY:
 report_policy_parser.py reads a given privacy policy (either online or in a textfile). Given this privacy policy the program than runs two tests. 
@@ -38,6 +40,9 @@ REQUIREMENTS and INSTALLATION:
 		- Download the file from this url: "https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing"
 		- Drag it into the same folder as interactive_policy_parser.py 
 		- Double click to unzip (on a mac at least)
+
+TO RUN PROGRAM:
+	- "python interactive_policy_parser.py"
 
 SUMMMARY:
 interactive_policy_parser.py allows you to search throught the privacy policy for sentences of interest. When you provide a keyword, the program transforms the word into its word2vec vector representation and expands the keyword query set to a list of 30 words most similiar to the keyword provided (as judged by the word2vec model). All the sentences are then searched for references to any word in this set.
