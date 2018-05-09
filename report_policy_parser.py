@@ -17,36 +17,10 @@ import time
 import sys
 
 import textwrap
-from gensim.models import KeyedVectors
 import requests
 
 from policy_grabber import policy_grabber
 from policy_tests import *
-
-use_word2vec = False
-
-if use_word2vec:
-	###############################################################
-	# Load pretrained Google word2vec model
-	def load_word2vec_model():
-		print("Loading pretrained Google word2vec model...")
-		print("expected time on the order of 60 sec")
-		start_time = time.time()
-		filename = 'GoogleNews-vectors-negative300.bin'
-		model = KeyedVectors.load_word2vec_format(filename, binary=True)
-		testing123 = model.most_similar(positive=["testing"], topn=20)
-		print("Successfully loaded model ({} sec)".format(time.time() - start_time))
-		return model
-
-	model = load_word2vec_model()
-
-	## for testing purposes:
-	# while True:
-	# 	test_keyword = input("keyword:")
-	# 	for word in keyword_expander(test_keyword, 10, model):
-	
-else:
-	model = None
 
 
 
