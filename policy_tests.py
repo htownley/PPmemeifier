@@ -66,7 +66,7 @@ def collect_test(all_sentences):
 		print('    ',i+1, possible_NOT_data_collected[i])
 	print()
 
-	return
+	return possible_data_collected, possible_NOT_data_collected
 
 
 def third_party_test(all_sentences):
@@ -90,6 +90,6 @@ def third_party_test(all_sentences):
 		print('    ', i+1, possible_data_collected[i])
 	print()
 
-	return
+	return possible_data_collected
 
 

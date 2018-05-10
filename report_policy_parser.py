@@ -15,18 +15,19 @@ Download:
 import os
 import time
 import sys
+import webbrowser
 
 import textwrap
 import requests
 
 from policy_grabber import policy_grabber
 from policy_tests import *
-
+from policy_pdf import generate_pdf
 
 
 ###############################################################
 # start main function
-def main(model):
+def main():
 
 	# Introduction:
 	introduction()
@@ -42,8 +43,15 @@ def main(model):
 	print("Analyzing " + policy_location + "...")
 	print()
 
-	collect_test(all_sentences)
-	third_party_test(all_sentences)
+	# run tests (defined in policy_tests.py)
+	collected_data, not_collected_data = collect_test(all_sentences)
+	third_party_data = third_party_test(all_sentences)
+
+	# generate the report
+	generate_pdf(policy_location, collected_data, not_collected_data, third_party_data)
+
+	# open report.html
+	webbrowser.open('file://' + os.path.realpath("report.html"))
 
 	return
 
@@ -137,24 +145,6 @@ def policy_collecter(url_bool, file_bool):
 
 	return all_sentences, user_input
 
-
-# returns list of words similiar to keyword
-# len(list) is on the order of topn in size
-def keyword_expander(keyword, topn, model):
-	result = model.most_similar(positive=[keyword], topn=topn)
-	result_lower = model.most_similar(positive=[keyword.lower()], topn=topn)
-	result_title = model.most_similar(positive=[keyword.title()], topn=topn)
-
-	result = result + result_lower + result_title
-	result = [tple[0].lower().replace("_", " ") for tple in result]
-	result.append(keyword)
-
-	print(len(result))
-	result = list(set(result))
-	print(len(result))
-
-	return result
-
 def string_to_sentence(text):
 	all_sentences = []
 	sentence = []
@@ -193,7 +183,7 @@ def text_is_relevant(text, keywords):
 
 
 if __name__== "__main__":
-	main(model)
+	main()
 
 
 
